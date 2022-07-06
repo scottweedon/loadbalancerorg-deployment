@@ -12,21 +12,27 @@ Loadbalancer.org Appliance running v8.6.2 or newer.
 3) Browse to **https://\<IP\>:9443/lbadmin/deployment**
 
 # Creating the Deployment File
-The deployment file is split into two sections. The **parameters** and the **config** combined together into a single **json** file.
+The deployment file is split into two sections. The **parameters** and the **config**. When combined together into a single **json** file we have a single deployment file that has the below structure.
 
-`{
+```
+{
+  
   "method": "manual",
+  
   "parameters": [
   ],
+  
   "config": {
   }
- }`
+  
+ }
+```
 
-**Parameters** allow you to specify custom values that are required to complete the configuration. These would for example be IP Addresses, Ports, Names and descriptions. Once the config file is uploaded, the values configured within this section will appear as html input fields allowing the end user to enter unique values. **This is an array of parameter objects.**
+**Parameters** allow you to specify custom values that are required to complete the configuration. Once the deployment file is uploaded, the values configured within this section will appear as html input fields allowing the end user to enter unique values. These parameters may for example be IP Addresses, Ports, Names and Descriptions. **This is an array of parameter objects.**
 
 **Config** stores the common or static configuration for this deployment. Again this could be IP Addresses, Ports, Names and Descriptions. However it is more likely this section is used for health checks or more advanced settings. **This is a single config object.**
 
-# Creating Parameters
+## Creating Parameters
 Each **Paramater Object** contains the following keys. ( * required )
 
 - name *
