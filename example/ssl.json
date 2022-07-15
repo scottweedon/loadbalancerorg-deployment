@@ -1,0 +1,19 @@
+{
+    "version": 1.0,
+    "method": "manual",
+    "parameters": [],
+    "config": {
+        "ssl":[
+            {
+                "vip": "CCW-WEB_SSL",               
+                "ip": "10.0.0.205",                
+                "port": "443",              
+                "backend_ip": "10.0.0.205",        
+                "backend_port": "80",      
+                "sslcert": "",           
+                "sslmode": "high",           
+                "haproxy_ssl_link": ""
+            }
+        ]
+    }
+}

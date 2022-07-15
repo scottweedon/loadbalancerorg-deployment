@@ -1,0 +1,23 @@
+{
+    "version": 1.0,
+    "method": "manual",
+    "parameters": [],
+    "config": {
+        "cert":[
+            {
+                "csrname": "www.example.com",                                                
+                "city": "CITY",                       
+                "province": "PROVINCE",                 
+                "country": "COUNTRY",               
+                "organisation": "ORGANISATION",                    
+                "unit": "UNIT",                   
+                "domain": "DOMAIN",           
+                "email": "EMAIL@EXMAPLE.COM",
+                "csrsize": 4096,
+                "signalgorithm": "sha256",
+                "days": 30, 
+                "encodedcertificate": ""
+            }
+        ]
+    }
+}

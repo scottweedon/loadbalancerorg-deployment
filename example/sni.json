@@ -1,0 +1,19 @@
+{
+    "version": 1.0,
+    "method": "manual",
+    "parameters": [],
+    "config": {
+        "sni":[
+            {
+                "vip": "CCW-WEB_SSL",                                                               
+                "sni_name": "SNINAME",                       
+                "sni_rule": "exmaple.com",                 
+                "sni_cert": "SSLCERTNAME",               
+                "sni_backend_proxyprotocol": "on",                    
+                "sni_backend_service": "CCW-WEB",                   
+                "sni_backend_ip": "10.0.0.171",           
+                "sni_backend_port": "80"
+            }
+        ]
+    }
+}

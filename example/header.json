@@ -1,0 +1,16 @@
+{
+    "version": 1.0,
+    "method": "manual",
+    "parameters": [],
+    "config": {
+        "header":[
+            {
+                "vip": "CCW-WEB",
+                "header_type": "http-request",
+                "header_option": "add",
+                "header_name": "TESTER",
+                "header_value": "VALUE"
+            }
+        ]
+    }
+}

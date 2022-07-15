@@ -1,0 +1,13 @@
+{
+    "version": 1.0,
+    "method": "manual",
+    "parameters": [],
+    "config": {
+        "pbr":[
+            {
+              "ip": "10.0.0.171",
+              "gateway": "10.0.0.2"
+            }
+        ]
+    }
+}

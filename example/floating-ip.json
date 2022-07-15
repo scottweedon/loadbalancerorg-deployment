@@ -1,0 +1,12 @@
+{
+    "version": 1.0,
+    "method": "manual",
+    "parameters": [],
+    "config": {
+        "fip":[
+            {
+              "ip": "10.0.0.175"
+            }
+        ]
+    }
+}

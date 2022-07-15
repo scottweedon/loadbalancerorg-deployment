@@ -1,0 +1,17 @@
+{
+    "version": 1.0,
+    "method": "manual",
+    "parameters": [],
+    "config": {
+        "acl":[
+            {
+                "vip": "CCW-WEB",
+                "pathtype": "path_beg",
+                "path": "home.",
+                "redirecttype": "url_loc",
+                "location": "http://www.google.com",
+                "bool": "equal"
+            }
+        ]
+    }
+}
