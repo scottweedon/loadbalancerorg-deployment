@@ -9,13 +9,6 @@
         "default": ""
     },
     {
-      "name": "VERSION",
-      "description": "Version",
-      "type": "text",
-      "method": "string",
-      "default": ""
-    },
-    {
         "name": "L7_RIPS",
         "description": "Cloudian Nodes",
         "type": "array",

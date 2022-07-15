@@ -179,11 +179,12 @@ function secure_deploymentform()
             } catch (Exception $e){
                 var_dump($e);
             }
+
+            $deployment->apply();
+            var_dump($deployment->config); //, JSON_PRETTY_PRINT);
             
             echo "</pre>";
 
-            $deployment->apply();
-            
         } catch (Exception $e) {
 
             echo "Invalid JSON";

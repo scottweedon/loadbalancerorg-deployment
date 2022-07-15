@@ -1,5 +1,6 @@
 <?php
 
+include("LBDeploymentCLI.php");
 include("LBDeploymentConfig.php");
 include("LBDeploymentParameter.php");
 
@@ -40,6 +41,14 @@ class LBDeployment {
         }
 
         
+
+    }
+
+    public static function logger($logline) {
+
+        $logfile = "/etc/loadbalancer.org/deploy.log";
+        $log = fopen($logfile, "a+") or die("Unable to open file!");
+        fwrite($log, date("Y/m/d h:i:s") . " - " . $logline . "\r\n");
 
     }
 

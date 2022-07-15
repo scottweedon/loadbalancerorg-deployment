@@ -2,7 +2,7 @@
 
 class LBDeploymentVIP {
 
-    public $name;                            // VIP name
+    public $vip;                            // VIP name
     public $ip;                              //<IP Address of VIP>
     public $ports;                           //(Ports can be 80 80:81 or 800-900 or 80:90-100:3443 as a mix of port:separated:values and also port-ranges values)
     public $rips;                            // Array of LBDeploymentRIP
@@ -12,7 +12,7 @@ class LBDeploymentVIP {
 
         if($data != null){
             
-            $this->name = $data->name;
+            $this->vip = $data->vip;
             $this->ip = $data->ip;
             $this->ports = $data->ports;
             
@@ -27,47 +27,24 @@ class LBDeploymentVIP {
 
     public function add() {
 
-        $output=null;
-        $retval=null;
+        try {
+            if( $this->vip != null ){
 
-        $command = "/usr/local/sbin/lbcli --action add-vip --vip " . $this->name;
-        
-        foreach ($this as $key => $value) {
-            if($value != null && $key != "vip" && $key != "name" && $key != "rips"){
-                $command .= " --$key $value";
-            }
-        }
-
-        exec($command, $output, $retval); 
-        //var_dump($output);
-
-        if(strpos($output[2], '"status":') != 0){
-
-            if(json_decode($output[2])->lbcli[0]->status == "success"){
-
-                foreach($this->rips as $rip){
-                    $rip->add();
+                $result = LBDeploymentCLI::execute("add-vip", $this);
+                switch($result){
+                    case 0: return false; break;
+                    case 1: return true; break;
+                    case 2: return LBDeploymentCLI::execute("edit-vip", $this); break;
                 }
 
-                return true;
-
             } else {
 
-                // something failed, throw the error
-                //throw new Exception($output);
+                return false;
 
             }
- 
-        } else {
+        } catch (Exception $e) {
 
-            if(strpos($output[1], 'exists') != 0){
-
-                return $this->edit();
-            
-            } else {
-                // something failed, throw the error
-                //throw new Exception($output);
-            }
+            throw $e;
 
         }
 
@@ -75,41 +52,24 @@ class LBDeploymentVIP {
 
     public function edit() {
 
-        $output=null;
-        $retval=null;
+        try {
+            if( $this->vip != null ){
 
-        $command = "/usr/local/sbin/lbcli --action edit-vip --vip " . $this->name;
-
-        foreach ($this as $key => $value) {
-            if($value != null && $key != "vip" && $key != "name" && $key != "rips"){
-                $command .= " --$key $value";
-            }
-        }
-
-        exec($command, $output, $retval); 
-        //var_dump($output);
-
-        if(strpos($output[1], '"status":') != 0){
-
-            if(json_decode($output[1])->lbcli[0]->status == "success"){
-            
-                foreach($this->rips as $rip){
-                    $rip->add();
+                $result = LBDeploymentCLI::execute("edit-vip", $this);
+                switch($result){
+                    case 0: return false; break;
+                    case 1: return true; break;
+                    case 2: return false; break;
                 }
 
-                return true;
-            
             } else {
 
-                // something failed, throw the error
-                //throw new Exception($output);
+                return false;
 
             }
-            
-        } else {
+        } catch (Exception $e) {
 
-            // something failed, throw the error
-            //throw new Exception($output);
+            throw $e;
 
         }
 
@@ -176,7 +136,7 @@ class L4LBDeploymentVIP extends LBDeploymentVIP {
             $this->check_secret = $data->check_secret;                    
             $this->check_command = $data->check_command;                   
             $this->autoscale_group = $data->autoscale_group;
-            $this->name = $data->name;
+            $this->vip = $data->vip;
             $this->ip = $data->ip;
             $this->ports = $data->ports;
             $this->layer = 4;
@@ -308,7 +268,7 @@ class L7LBDeploymentVIP extends LBDeploymentVIP {
             $this->fallback_encrypt = $data->fallback_encrypt;               
             $this->http_reuse_connection = $data->http_reuse_connection;         
             $this->tproxy = $data->tproxy;
-            $this->name = $data->name;
+            $this->vip = $data->vip;
             $this->ip = $data->ip;
             $this->ports = $data->ports;
             $this->layer = 7; 

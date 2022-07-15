@@ -107,6 +107,62 @@
       }
     ],
     "L4_vips": [
+    ],
+    "wafs": [
+      {
+        "waf": "test waf",
+        "vip": "api.!#L7_VIP_NAME#!"
+      },
+      {
+        "waf": "test waf2",
+        "vip": "https.s3.!#L7_VIP_NAME#!"
+      }
+    ],
+    "gslb": [
+      {
+        "globalnames": [
+          {
+            "name": "test.gslb.com",
+            "hostname": "test.gslb.com",
+            "ttl": 1
+          }
+        ],
+        "members": [
+          {
+            "name": "DC1",
+            "ip": "10.0.0.202",
+            "monitor_ip": "10.0.0.202",
+            "weight": 10
+          },
+          {
+            "name": "DC2",
+            "ip": "10.0.0.201",
+            "monitor_ip": "10.0.0.201",
+            "weight": 10
+          }
+        ],
+        "pools": [
+          {
+            "name": "POOL1",
+            "add_member": "DC1",
+            "add_globalname": "test.gslb.com"
+          },
+          {
+            "name": "POOL1",
+            "add_member": "DC2"
+          }
+        ],
+        "topologies": [
+          {
+            "name": "UK",
+            "add_ips": "10.0.0.0/24"
+          },
+          {
+            "name": "USA",
+            "add_ips": "10.10.0.0/24"
+          }
+        ]
+      }
     ]
   }
 }

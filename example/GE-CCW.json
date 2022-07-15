@@ -1,0 +1,117 @@
+{
+  "version": 1.0,
+  "method": "manual",
+  "parameters": [
+    {
+        "name": "VIP",
+        "description": "Virtual IP Address",
+        "type": "text",
+        "method": "string",
+        "default": ""
+    },
+    {
+        "name": "RIPS",
+        "description": "Backend Servers",
+        "type": "array",
+        "method": "object",
+        "default": "",
+        "values": [
+            ["Name", "rip"],
+            ["IPAddress", "ip"]
+        ]
+    }
+  ],
+  "config": {
+    "L7_vips": [
+      {
+        "mode": "tcp",
+        "vip": "CCW-WEB",
+        "ip": "!#VIP#!",
+        "persistence": "none",
+        "check_request": "/api/health/",
+        "check_port": "44301",
+        "check_type": "negotiate_http",
+        "check_receive": "allServicesOperative",
+        "ports": "443,8070,8443,44301,44300",
+        "check_host": "localhost",
+        "rips": "!#RIPS#!"
+      }
+    ],
+    "L4_vips": [
+      {
+        "protocol": "tcp",
+        "forwarding": "masq",
+        "vip": "CCW-DICOMSERVICE-VS",
+        "ip": "!#VIP#!",
+        "ports": "104",
+        "scheduler": "leastconn",
+        "persistent": "off",
+        "check_type": "external",
+        "check_command": "c-Echo.sh",
+        "rips": "!#RIPS#!"
+      },
+      {
+        "protocol": "tcp",
+        "forwarding": "masq",
+        "vip": "CCW-DICOM-1115",
+        "ip": "!#VIP#!",
+        "ports": "1115",
+        "scheduler": "leastconn",
+        "persistent": "off",
+        "check_type": "external",
+        "check_command": "c-Echo.sh",
+        "rips": "!#RIPS#!"
+      },
+      {
+        "protocol": "tcp",
+        "forwarding": "masq",
+        "vip": "CCW-DICOM-1299",
+        "ip": "!#VIP#!",
+        "ports": "1299",
+        "scheduler": "leastconn",
+        "persistent": "off",
+        "check_type": "external",
+        "check_command": "c-Echo.sh",
+        "rips": "!#RIPS#!"
+      },
+      {
+        "protocol": "tcp",
+        "forwarding": "masq",
+        "vip": "CCW-DICOMSERVER-VS",
+        "ip": "!#VIP#!",
+        "ports": "1230",
+        "scheduler": "leastconn",
+        "persistent": "off",
+        "check_type": "external",
+        "check_command": "c-Echo.sh",
+        "rips": "!#RIPS#!"
+      },
+      {
+        "protocol": "tcp",
+        "forwarding": "snat",
+        "vip": "CCW-INTERFACE-VS",
+        "ip": "!#VIP#!",
+        "ports": "5001,6001",
+        "scheduler": "leastconn",
+        "persistent": "on",
+        "persist_time": 300,
+        "check_type": "connect",
+        "check_port": "5001",
+        "rips": "!#RIPS#!"
+      },
+      {
+        "protocol": "tcp",
+        "forwarding": "snat",
+        "vip": "CCW-CLOVERLEAF-VS",
+        "ip": "!#VIP#!",
+        "ports": "2001,3001,4001,4002",
+        "scheduler": "leastconn",
+        "persistent": "on",
+        "persist_time": 300,
+        "check_type": "connect",
+        "check_port": "2001",
+        "rips": "!#RIPS#!"
+      }
+    ]
+  }
+}
